@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link >
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card page">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="main-city" id="current-city">Find your city</h1>
+                </div>
+            </div>
+            <div class="weather-row">
+                <div class="row col-12">
+                    <div class="temp-now col-7">
+                        <img id="weather-icon" src="https://openweathermap.org/img/wn/02d@2x.png">
+                        <span id="current-temp">
+                            ?
+                        </span>
+                        <span class="temp-units">
+                            <!-- <div class="links"></div> -->
+                            <a href="" class="celsius">
+                                °C
+                            </a> |
+                            <a href="" class="fahrenheits">
+                                F
+                            </a>
+                        </span>
+            
+                    </div>
+                    <div class="weather-properties col-5">
+                        <h4 class="date-info">Thursday 7 of July</h4>
+                        <ul>
+                            <li>Cloudiness: <span id="cloudiness"></span>35%</li>
+                            <li>Humidity: <span id="humidity"></span>54%</li>
+                            <li>Wind: <span id="wind-speed"></span>1m/s</li>
+                        </ul>
+            
+                    </div>
+                </div>
+            </div>
+            <div class="row search-block">
+                <form class="input-group mb-3 search-tab" id="search-form">
+                    <input type="search" class="form-control" id="input-form" placeholder="Type city name..." autocomplete="off">
+                    <button class="btn btn-outline-light search-button" type="submit" value="search" id="start-button">
+                        Search
+                    </button>
+                    <button class="btn btn-outline-light location-button" type="button" id="current-location">
+                        Current location
+                    </button>
+                </form>
+            </div>
+            <section class="col forecast">
+                <div class="row day-info">
+                    <div class="day col-6">Thu</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row day-info">
+                    <div class="day col-6">Fri</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row day-info">
+                    <div class="day col-6">Sat</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row day-info">
+                    <div class="day col-6">Sat</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row day-info">
+                    <div class="day col-6">Sun</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class=" row day-info">
+                    <div class="day col-6">Mon</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                        <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="day-info row">
+                    <div class="day col-6">Tue</div>
+                    <div class="icon col-2">
+                        <img src="https://openweathermap.org/img/wn/10d@2x.png" alt="weather-icon" class="weather-icon" width="45px">
+                    </div>
+                    <div class="temperatures-block col-4">
+                    <div class="temperatures">
+                            <span class="min-temp">18°C</span> -
+                            <span class="max-temp">22°C</span>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+        <script src="./script.js"></script>
+</body>
+</html>
