@@ -53,3 +53,16 @@ ul {
 .day {
     text-align: left;
 }
+.link-to-code {
+    margin: 0 auto;
+    text-align: center;
+}
+.link-to-git {
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(175, 146, 223);
+}
+.link-to-git:hover {
+ color: rgb(175, 146, 223);
+ text-decoration: underline;
+}
