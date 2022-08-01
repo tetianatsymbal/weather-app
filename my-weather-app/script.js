@@ -53,11 +53,11 @@ function findCity(event) {
 
 
 
-function changeCurrentUnits(convertedTemp, currentTemp) { 
-    let links = document.querySelectorAll(".temp-units a")
-    currentTemp.innerHTML = convertedTemp;
-    // links.classList.add("actual-units");
-}
+// function changeCurrentUnits(convertedTemp, currentTemp) { 
+//     let links = document.querySelectorAll("a .temp-units a")
+//     currentTemp.innerHTML = convertedTemp;
+//     links.classList.add("actual-units");
+// }
 
 function convertToCels(event) { 
     event.preventDefault();
