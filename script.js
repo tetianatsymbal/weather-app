@@ -19,7 +19,7 @@ function displayLocationTemp(response) {
     return displayCurrentTemp(response);
 }
 
-function showLocationTemp(position) {
+function showLocation(position) {
     let latitude = Math.round(position.coords.latitude);
     let longitude = Math.round(position.coords.longitude);
     console.log(`My position is latitude: ${latitude} and longitude:${longitude}`);
@@ -29,9 +29,10 @@ function showLocationTemp(position) {
     axios.get(apiUrl).then(displayCurrentCloud);
     axios.get(apiUrl).then(displayCurrentHumidity);
     axios.get(apiUrl).then(displayCurrentWind);
+    axios.get(apiUrl).then(displayIcon);
 }
 function findLocation() {
-    return navigator.geolocation.getCurrentPosition(showLocationTemp);
+    return navigator.geolocation.getCurrentPosition(showLocation);
 }
 function displayCurrentTemp(response) {
     console.log(response.data);
@@ -55,14 +56,19 @@ function displayCurrentWind(response) {
     let currentWindEl = document.querySelector("#wind");
     currentWindEl.innerHTML = Math.round(response.data.wind.speed);
 }
+function displayIcon(response) {
+    let iconEl = document.querySelector("#weather-icon");
+    iconEl.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+}
 
-function findCityTemp(city) {
+function findCityDescription(city) {
     let apiKey = "cff0f825ec363b6c795a4f1421098130";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
     axios.get(apiUrl).then(displayCurrentTemp);
     axios.get(apiUrl).then(displayCurrentCloud);
     axios.get(apiUrl).then(displayCurrentHumidity);
     axios.get(apiUrl).then(displayCurrentWind);
+    axios.get(apiUrl).then(displayIcon);
 }
 
 function findCity(event) { 
@@ -70,8 +76,8 @@ function findCity(event) {
     let currentCityEl = document.querySelector("#current-city");
     let searchFormInput = document.querySelector("#input-form");
     let currentCity = searchFormInput.value;
-    currentCityEl.innerHTML = currentCity;
-    return findCityTemp(currentCity);
+    currentCityEl.innerHTML = currentCity.charAt(0).toUpperCase() + currentCity.slice(1);
+    return findCityDescription(currentCity);
 }
 
 function changeCurrentUnits(convertedTemp, currentTemp) { 
