@@ -51,29 +51,26 @@ function findCity(event) {
     return findCityTemp(currentCity);
 }
 
-
-
-// function changeCurrentUnits(convertedTemp, currentTemp) { 
-//     let links = document.querySelectorAll("a .temp-units a")
-//     currentTemp.innerHTML = convertedTemp;
-//     links.classList.add("actual-units");
-// }
+function changeCurrentUnits(convertedTemp, currentTemp) { 
+    let links = document.querySelectorAll("a .temp-units a")
+    currentTemp.innerHTML = convertedTemp;
+    links.classList.add("actual-units");
+}
 
 function convertToCels(event) { 
     event.preventDefault();
     let currentTemp = document.querySelector("#current-temp");
     let currentTempValue = parseInt(currentTemp.textContent);
     let convertedTemp = Math.round((currentTempValue - 32) * 5 / 9);
-    return changeCurrentUnits(convertedTemp, currentTemp);
-    
+    return changeCurrentUnits(convertedTemp, currentTemp);   
 }
+
 function convertToFhrt(event) { 
     event.preventDefault();
     let currentTemp = document.querySelector("#current-temp");
     let currentTempValue = parseInt(currentTemp.textContent);
     let convertedTemp = Math.round((currentTempValue * 9) / 5 + 32);
     return changeCurrentUnits(convertedTemp, currentTemp);
-
 }
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", findCity);
