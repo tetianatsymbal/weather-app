@@ -39,6 +39,7 @@ function displayCurrentTemp(response) {
     let currentTempEl = document.querySelector("#current-temp");
     let temperature = Math.round(response.data.main.temp);
     currentTempEl.innerHTML = temperature;
+    celsiusTemp = response.data.main.temp;
 }
 
 function displayCurrentCloud(response) {
@@ -81,28 +82,29 @@ function findCity(event) {
     return findCityDescription(currentCity);
 }
 
-function changeCurrentUnits(convertedTemp, currentTemp) { 
-    let links = document.querySelectorAll("a .temp-units a")
-    currentTemp.innerHTML = convertedTemp;
-    links.classList.add("actual-units");
-}
+// function changeCurrentUnits(convertedTemp, currentTemp) { 
+//     let links = document.querySelectorAll("a .temp-units a")
+//     currentTemp.innerHTML = convertedTemp;
+//     links.classList.add("actual-units");
+// }
 
 function convertToCels(event) { 
     event.preventDefault();
+    celsBtn.classList.add("active");
+    fhrtBtn.classList.remove("active");
     let currentTemp = document.querySelector("#current-temp");
-    let currentTempValue = parseInt(currentTemp.textContent);
-    let convertedTemp = Math.round((currentTempValue - 32) * 5 / 9);
-    return changeCurrentUnits(convertedTemp, currentTemp);   
+    currentTemp.innerHTML = Math.round(celsiusTemp);
 }
 
 function convertToFhrt(event) { 
     event.preventDefault();
+    celsBtn.classList.remove("active");
+    fhrtBtn.classList.add("active");
     let currentTemp = document.querySelector("#current-temp");
-    let currentTempValue = parseInt(currentTemp.textContent);
-    let convertedTemp = Math.round((currentTempValue * 9) / 5 + 32);
-    return changeCurrentUnits(convertedTemp, currentTemp);
+    currentTemp.innerHTML = Math.round((celsiusTemp * 9) / 5 + 32);
 }
-findCityDescription("Kyiv");
+
+let celsiusTemp = null;
 
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", findCity);
@@ -115,3 +117,5 @@ fhrtBtn.addEventListener("click", convertToFhrt);
 
 let currentLocationBtn = document.querySelector("#current-location");
 currentLocationBtn.addEventListener("click", findLocation);
+
+findCityDescription("Kyiv");

@@ -26,13 +26,24 @@ ul {
     font-weight: 800;
 }
 .temp-units{
-    font-size: 23px;
+    font-size: 20px;
+    position: relative;
+    top: -27px;
+    line-height: 1;
 }
 .celsius, .fahrenheits{
     text-decoration: none;
     color: white;
 }
-
+.temp-units .active{
+    cursor: default;
+    color: #fff;
+    font-size: 23px;
+}
+.temp-units .active:hover{
+    cursor: default;
+    color: #fff;
+}
 .actual-units{
     font-size: 28px;
     color: rgb(149, 126, 175);
