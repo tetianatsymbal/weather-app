@@ -59,6 +59,7 @@ function displayCurrentWind(response) {
 function displayIcon(response) {
     let iconEl = document.querySelector("#weather-icon");
     iconEl.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
+    iconEl.setAttribute("alt", `${response.data.weather[0].description}`);
 }
 
 function findCityDescription(city) {
@@ -101,6 +102,8 @@ function convertToFhrt(event) {
     let convertedTemp = Math.round((currentTempValue * 9) / 5 + 32);
     return changeCurrentUnits(convertedTemp, currentTemp);
 }
+findCityDescription("Kyiv");
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", findCity);
 
