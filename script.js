@@ -4,19 +4,14 @@ let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "S
     let currentDay = days[newDate.getDay()]; 
     let currentHour = newDate.getHours();
     let currentMinutes = newDate.getMinutes();
-
 return (`${currentDay} ${currentHour}:${currentMinutes}`);
 }
-
 let dateInfo = document.querySelector(".date-info");
 dateInfo.innerHTML = getDate();
 
-function displayLocationTemp(response) { 
+function displayLocation(response) { 
     let currentCityEl = document.querySelector("#current-city");
-    let currentCity = response.data.name;
-    currentCityEl.innerHTML = currentCity;
-    console.log(currentCity);
-    return displayCurrentTemp(response);
+    currentCityEl.innerHTML = response.data.name;
 }
 
 function showLocation(position) {
@@ -25,40 +20,29 @@ function showLocation(position) {
     console.log(`My position is latitude: ${latitude} and longitude:${longitude}`);
     let apiKey = "cff0f825ec363b6c795a4f1421098130";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayLocationTemp);
-    axios.get(apiUrl).then(displayCurrentCloud);
-    axios.get(apiUrl).then(displayCurrentHumidity);
-    axios.get(apiUrl).then(displayCurrentWind);
-    axios.get(apiUrl).then(displayIcon);
+    axios.get(apiUrl).then(displayLocation);
+
+    axios.get(apiUrl).then(displayCurrentWeatherDisc);
 }
+
 function findLocation() {
     return navigator.geolocation.getCurrentPosition(showLocation);
 }
-function displayCurrentTemp(response) {
-    console.log(response.data);
+function displayCurrentWeatherDisc(response) {
     let currentTempEl = document.querySelector("#current-temp");
     let temperature = Math.round(response.data.main.temp);
-    currentTempEl.innerHTML = temperature;
-    celsiusTemp = response.data.main.temp;
-}
-
-function displayCurrentCloud(response) {
     let currentCloudEl = document.querySelector("#cloudiness");
     let description = response.data.weather[0].description;
-    currentCloudEl.innerHTML = description.charAt(0).toUpperCase() + description.slice(1);
-}
-
-function displayCurrentHumidity(response) {
     let currentHumidityEl = document.querySelector("#humidity");
-    currentHumidityEl.innerHTML = Math.round(response.data.main.humidity);
-}
-
-function displayCurrentWind(response) {
     let currentWindEl = document.querySelector("#wind");
-    currentWindEl.innerHTML = Math.round(response.data.wind.speed);
-}
-function displayIcon(response) {
     let iconEl = document.querySelector("#weather-icon");
+
+    celsiusTemp = response.data.main.temp;
+
+    currentTempEl.innerHTML = temperature;
+    currentCloudEl.innerHTML = description.charAt(0).toUpperCase() + description.slice(1);
+    currentHumidityEl.innerHTML = Math.round(response.data.main.humidity);
+    currentWindEl.innerHTML = Math.round(response.data.wind.speed);
     iconEl.setAttribute("src", `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
     iconEl.setAttribute("alt", `${response.data.weather[0].description}`);
 }
@@ -66,11 +50,7 @@ function displayIcon(response) {
 function findCityDescription(city) {
     let apiKey = "cff0f825ec363b6c795a4f1421098130";
     let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayCurrentTemp);
-    axios.get(apiUrl).then(displayCurrentCloud);
-    axios.get(apiUrl).then(displayCurrentHumidity);
-    axios.get(apiUrl).then(displayCurrentWind);
-    axios.get(apiUrl).then(displayIcon);
+    axios.get(apiUrl).then(displayCurrentWeatherDisc);
 }
 
 function findCity(event) { 
@@ -81,12 +61,6 @@ function findCity(event) {
     currentCityEl.innerHTML = currentCity.charAt(0).toUpperCase() + currentCity.slice(1);
     return findCityDescription(currentCity);
 }
-
-// function changeCurrentUnits(convertedTemp, currentTemp) { 
-//     let links = document.querySelectorAll("a .temp-units a")
-//     currentTemp.innerHTML = convertedTemp;
-//     links.classList.add("actual-units");
-// }
 
 function convertToCels(event) { 
     event.preventDefault();
