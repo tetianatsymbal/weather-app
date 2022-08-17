@@ -25,7 +25,7 @@ function dispalyForecast(response) {
             if (index < 7) {
                 forecastHTML = forecastHTML +
                 `<div class="row day-info">
-                <div class="day col-6">${formatForecastDay(forecastDay.dt)}</div>
+                <div class="day col-5">${formatForecastDay(forecastDay.dt)}</div>
                 <div class="icon col-2">
                         <img src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png" alt="weather-icon" class="weather-icon" width="45px" id="day-weather-icon">
                 </div>
@@ -58,8 +58,8 @@ function displayLocation(response) {
 }
 
 function showLocation(position) {
-    let latitude = Math.round(position.coords.latitude);
-    let longitude = Math.round(position.coords.longitude);
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
     let apiKey = "cff0f825ec363b6c795a4f1421098130";
     let apiUrl = '';
     if (!fhrtBtn.classList.contains("active")) {
